@@ -19,5 +19,11 @@ class AdminManager extends AbstractManager {
       [userName, password_hash]
     );
   }
+
+  getAdmindById(id) {
+    return this.database.query(`SELECT * FROM ${this.table} WHERE id = ?`, [
+      id,
+    ]);
+  }
 }
 module.exports = AdminManager;

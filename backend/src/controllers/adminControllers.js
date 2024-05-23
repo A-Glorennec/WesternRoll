@@ -56,7 +56,23 @@ const adminLogin = async (req, res) => {
   }
 };
 
+const readAdminById = async (req, res) => {
+  try {
+    const id = req.payload;
+    const [admins] = await tables.admins.getAdmindById(id);
+
+    if (admins.length) {
+      res.status(200).json({ message: "Connecté", admin: admins[0] });
+    } else {
+      res.status(401).send("Vérifiez vos données");
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   adminLogin,
   createAdmin,
+  readAdminById,
 };
